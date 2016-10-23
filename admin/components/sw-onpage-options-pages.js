@@ -42,6 +42,10 @@
             link.href = self.getPath();
             link.innerText = self.getDisplayName();
 
+            link.addEventListener('dragstart', function (event) {
+                self._dragStart(event);
+            });
+
             var delLink = li.querySelector('.sw-onpage-navigation-item-delete');
             var addLink = li.querySelector('.sw-onpage-navigation-item-add');
 
@@ -75,7 +79,7 @@
                 var msg = '';
                 if (hasChildren) {
                     msg = 'Are you sure you want to remove ' + self.getDisplayName() + ' and all children?';
-                }else {
+                } else {
                     msg = 'Are you sure you want to remove ' + self.getDisplayName() + '?';
                 }
                 if (confirm(msg)) {
@@ -86,19 +90,19 @@
                             if (isCurrentPagePartOfDeletedPath) {
                                 // we need to send user upwards in tree as current page has been removed.
                                 var loc = location.pathname.replace('index.html', '').replace('index.htm', '');
-                                var lastChar = loc[loc.length -1];
+                                var lastChar = loc[loc.length - 1];
                                 if (lastChar !== '/') {
                                     loc = loc + '/';
                                 }
-                                var index = loc.lastIndexOf('/',loc.length -2);
+                                var index = loc.lastIndexOf('/', loc.length - 2);
                                 loc = loc.substring(0, index + 1);
                                 // do the actual move to parent page
                                 location.pathname = loc;
-                            }else{
+                            } else {
                                 // reload page or update places that show page tree
                                 location.reload();
                             }
-                        }else{
+                        } else {
                             alert('Unable to delete ' + path);
                         }
                     });
@@ -106,6 +110,20 @@
             });
 
             this._element = li;
+        },
+        _dragStart: function (event) {
+            var self = this;
+
+            var data = {
+                path: self.getPath(),
+                name: self.getDisplayName()
+            };
+
+            event.dataTransfer.setData("sw-navNodeData", JSON.stringify(data));
+            // Add the drag data
+            //event.dataTransfer.setData("text/plain", self.getDisplayName());
+            //ev.dataTransfer.setData("text/html", "<p>Example paragraph</p>");
+            event.dataTransfer.setData("text/uri-list", self.getPath());
         },
         _showAddPageDialog: function () {
             var self = this;
@@ -177,9 +195,9 @@
             }
 
             // Make sure we have Title case on display name
-            if (name && name.length > 0) {
-                name = name.substring(0, 1).toUpperCase() + name.substring(1);
-            }
+            // if (name && name.length > 0) {
+            //     name = name.substring(0, 1).toUpperCase() + name.substring(1);
+            // }
 
             this._displayName = name;
         },

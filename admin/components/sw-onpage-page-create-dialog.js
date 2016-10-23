@@ -18,6 +18,10 @@
         // get the dialog template
         self._dialogTemplate = self._template.querySelector('sw-dialog').children[0];
 
+        // Hide extra scroll while dialog is visible
+        var body = document.querySelector('body');
+        body.style.overflowY = 'hidden';
+
         staticWeb.insertTemplate(self._dialogTemplate, self._element);
 
         // set parent path in ui so user can see where new page will be placed
@@ -40,7 +44,7 @@
       return this.getPageUrl().replace('/index.html', '/metadata.json');
     },
     setPageName: function (name) {
-      this._name = name;
+      this._name = staticWeb.encodeToHtml(name);
     },
     getPageName: function () {
       return this._name;
@@ -56,6 +60,8 @@
       var closeBtn = element.querySelector('.sw-onpage-dialog-close');
       closeBtn.addEventListener('click', function () {
         element.remove();
+        var body = document.querySelector('body');
+        body.style.overflowY = '';
       });
 
       // We want help user by automatically create a path from the name *he enters.
