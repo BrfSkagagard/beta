@@ -1,0 +1,151 @@
+<sw-template>
+    <div>
+        <style>
+        .sw-navigation-dialog {
+                position: fixed;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background-color: #fff;
+                color: #000;
+                z-index: 1000000;
+                overflow-x: hidden;
+                overflow-y: auto;
+                font-family: sans-serif;
+                line-height: 1.45;
+            }
+            
+            .sw-navigation-dialog-header {
+                padding: 5px 10px;
+                background-color: #2F5575;
+                color: #fff;
+                text-align: center;
+                font-weight: bold;
+            }
+            
+            .sw-onpage-dialog-close {
+                color: #fff;
+                text-decoration: none;
+                float: right;
+                /* to ensure bigger click area for touch devices */
+                padding: 0 10px;
+            }
+            
+            .sw-navigation-dialog-content {
+                padding: 10px;
+            }
+            
+            .sw-navigation-dialog-template {
+                margin: 5px;
+                padding: 1px;
+                width: 300px;
+                display: inline-block;
+                color: #fff;
+                vertical-align: top;
+                border-radius: 6px;
+                border: #2F5575 solid 1px;
+                color: #2F5575;
+                text-decoration: none;
+                cursor: pointer;
+            }
+            
+            .sw-navigation-dialog input[type=text] {
+                border-radius: 6px;
+                border: #2F5575 solid 1px;
+                line-height: 1.45;
+                padding: 2px 5px;
+            }
+            
+            .sw-navigation-dialog-content-templates input[type=radio] {
+                position: absolute;
+                top: -1000px;
+                left: -1000px;
+            }
+            
+            .sw-navigation-dialog-content-templates input[type=radio]:checked + .sw-navigation-dialog-template {
+                background-color: #2F5575;
+                color: #fff;
+                outline: none;
+            }
+            
+            .sw-navigation-dialog-template:hover,
+            .sw-navigation-dialog-template:active,
+            .sw-navigation-dialog-template:focus,
+            .sw-navigation-dialog-template:target {
+                background-color: #2F5575;
+                color: #fff;
+                outline: none;
+            }
+            
+            .sw-navigation-dialog-template b {
+                display: block;
+                padding: 4px
+            }
+            
+            .sw-navigation-dialog-template-preview {
+                position: relative;
+                width: 300px;
+                height: 300px;
+                overflow: hidden;
+            }
+            
+            .sw-navigation-dialog-template img {
+                cursor: pointer;
+                background-color: #fff;
+                height: 300px;
+                width: 300px;
+                border: 0;
+                pointer-events: none;
+            }
+            .sw-navigation-dialog-template iframe {
+                cursor: pointer;
+                background-color: #fff;
+                height: 1200px;
+                width: 1200px;
+                transform: scale(0.25);
+                transform-origin: left top;
+                border: 0;
+                pointer-events: none;
+                display:none;
+
+            }            
+            .sw-navigation-dialog-template img {
+                position: absolute;
+                left: 0;
+                top: 0;
+            }
+            
+            .sw-navigation-dialog-add-page {
+                float: right;
+            }
+        }
+        </style>
+        <sw-dialog>
+            <div class="sw-navigation-dialog">
+                <div class="sw-navigation-dialog-header">
+                    Navigation<a href="#close" title="Close dialog" class="sw-onpage-dialog-close">x</a>
+                </div>
+                <div class="sw-navigation-dialog-content">
+                    <div class="sw-navigation-dialog-add-nav">
+                        <div>
+                            <b>Link text:</b>
+                            <input id="sw-navigation-dialog-name" type="text" value="" autofocus />
+                        </div>
+                        <div>
+                            <b>Link url:</b>
+                            <input id="sw-navigation-dialog-url" type="text" value="" />
+                        </div>
+                    </div>
+                    <div>
+                        <b>Current navigation:</b>
+                    </div>
+                    <div class="sw-navigation-dialog-navigation">
+                        TODO: List navigation here
+                    </div>
+                    <a class="sw-navigation-dialog-add-page" href="#create-page">Save</a>
+                </div>
+            </div>
+        </sw-dialog>
+    </div>
+</sw-template>
