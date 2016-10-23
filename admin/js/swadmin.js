@@ -470,6 +470,11 @@
         var toHtmlCode = function (char) { return '&#' + char.charCodeAt('0') + ';'; };
         return data.replace(/([^a-z0-9!{}<>/\;&#\:\ \=\\r\\n\\t\"\'\%\*\-\.\,\(\)\@])/gi, toHtmlCode);
     }
+    StaticWebDefinition.prototype.decodeToText = function (data) {
+        var element = document.createElement('div');
+        element.innerHTML = data;
+        return element.innerText;
+    }
     StaticWebDefinition.prototype.getToken = function () {
         // We are hardcoded to support 'dropbox' and 'github' here as we us the 'token' key used by them.
         // TODO: fix this so it has pure cross provider support.
