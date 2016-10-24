@@ -15,23 +15,27 @@
             self._element.addEventListener('drop', function (event) {
                 event.preventDefault();
 
-                var url = event.dataTransfer.getData("text/uri-list");
-                // Get the id of the target and add the moved element to the target's DOM
-                var navNodeData = event.dataTransfer.getData("sw-navNodeData");
-                if (navNodeData) {
-                    var navNode = JSON.parse(navNodeData);
-                    // todo: get real name of page
-                    name = navNode.name;
-                    url = navNode.path;
-                    staticWeb.storage.get(navNode.path + 'metadata.json', function (file, callStatus) {
-                        if (callStatus.isOK) {
-                            var metadata = JSON.parse(file.data);
-                            name = staticWeb.decodeToText(metadata.name);
-                        }
-                        self.addNavigationItemDialog(url, name);
-                    });
-                    return;
-                }
+                var name = false;
+                var url = false;
+                var obj = event.dataTransfer.getData("text");
+                try {
+                    var navNode = JSON.parse(obj);
+                    if (navNode) {
+                        name = navNode.name;
+                        url = navNode.path;
+                        staticWeb.storage.get(navNode.path + 'metadata.json', function (file, callStatus) {
+                            if (callStatus.isOK) {
+                                var metadata = JSON.parse(file.data);
+                                name = staticWeb.decodeToText(metadata.name);
+                            }
+                            self.addNavigationItemDialog(url, name);
+                        });
+                        return;
+                    }
+                } catch (ex) { }
+
+                //name = event.dataTransfer.getData("text");
+                url = event.dataTransfer.getData("text/uri-list");
 
                 self.addNavigationItemDialog(url, 'unknown name');
             });

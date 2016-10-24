@@ -53,7 +53,31 @@
         body.style.overflowY = '';
       });
 
-
+      var items = element.querySelectorAll('.sw-navigation-dialog-navigation ul li');
+      for (var i = 0; i < items.length; i++) {
+        items[i].setAttribute('draggable', 'true');
+        items[i].id = 'sw-navigation-dialog-navigation-item-' + i;
+        items[i].addEventListener('dragstart', function (event) {
+          event.dataTransfer.setData("text", event.target.id);
+        });
+        items[i].addEventListener('dragover', function (event) {
+          event.preventDefault();
+          // Set the dropEffect to move
+          event.dataTransfer.dropEffect = "move";
+        });
+        items[i].addEventListener('drop', function (event) {
+          event.preventDefault();
+          var data = event.dataTransfer.getData("text");
+          var target = event.target;
+          while (!target.id) {
+            target = target.parentNode;
+          }
+          var el = document.querySelector('#' + data);
+          if (el) {
+            target.insertAdjacentElement('afterend', el);
+          }
+        });
+      }
     },
     init: function (element) {
       var self = this;

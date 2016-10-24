@@ -119,11 +119,11 @@
                 name: self.getDisplayName()
             };
 
-            event.dataTransfer.setData("sw-navNodeData", JSON.stringify(data));
+            event.dataTransfer.setData("text", JSON.stringify(data));
             // Add the drag data
-            //event.dataTransfer.setData("text/plain", self.getDisplayName());
+            //event.dataTransfer.setData("text", self.getDisplayName());
             //ev.dataTransfer.setData("text/html", "<p>Example paragraph</p>");
-            event.dataTransfer.setData("text/uri-list", self.getPath());
+            //event.dataTransfer.setData("text/uri-list", self.getPath());
         },
         _showAddPageDialog: function () {
             var self = this;
