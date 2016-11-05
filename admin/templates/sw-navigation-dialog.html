@@ -117,7 +117,8 @@
 				top: 0;
 			}
 			
-			.sw-navigation-dialog-add-page {
+			.sw-navigation-dialog-add-link,
+			.sw-navigation-dialog-save-nav {
 				float: right;
 			}
 			
@@ -148,6 +149,20 @@
 				border-left: solid 1px #000;
 			}
 			
+			.sw-navigation-dialog-navigation-item-edit {
+				position: absolute;
+				right: 30px;
+				text-decoration: none;
+				padding-top: 5px;
+				color: #000;
+				top: 0;
+				bottom: 0;
+				width: 30px;
+				background-color: orange;
+				text-align: center;
+				border-left: solid 1px #000;
+			}
+
 			.sw-navigation-dialog-navigation-item-move {
 				position: absolute;
 				left: 0;
@@ -157,7 +172,7 @@
 				top: 0;
 				bottom: 0;
 				width: 30px;
-				background-color: green;
+				background-color: #2F5575;
 				text-align: center;
 				border-right: solid 1px #000;
 				cursor: move;
@@ -178,26 +193,26 @@
 							<b>Link url:</b>
 							<input id="sw-navigation-dialog-url" type="text" value="" />
 						</div>
-					</div>
-					<div>
-						<b>Current navigation:</b>
+						<a class="sw-navigation-dialog-add-link" href="#add-link">Add Link to navigation</a>
+						<br />
+						<hr />
 					</div>
 					<div class="sw-navigation-dialog-navigation">
-						TODO: List navigation here
+						<b>Current navigation:</b>
 						<ul>
-							<li> Nyheter
-								<div class="sw-navigation-dialog-navigation-item-move" title="move navigation item" href="#move">M</div><a class="sw-navigation-dialog-navigation-item-delete" href="#delete">x</a></li>
-							<li> Medlem
-								<div class="sw-navigation-dialog-navigation-item-move" title="move navigation item" href="#move">M</div><a class="sw-navigation-dialog-navigation-item-delete" href="#delete">x</a></li>
-							<li> Området
-								<div class="sw-navigation-dialog-navigation-item-move" title="move navigation item" href="#move">M</div><a class="sw-navigation-dialog-navigation-item-delete" href="#delete">x</a></li>
-							<li> Kontakt
-								<div class="sw-navigation-dialog-navigation-item-move" title="move navigation item" href="#move">M</div><a class="sw-navigation-dialog-navigation-item-delete" href="#delete">x</a></li>
+							<li> Loading menu items, please wait...
 						</ul>
+						<a class="sw-navigation-dialog-save-nav" href="#save-nav">Save</a>
 					</div>
-					<a class="sw-navigation-dialog-add-page" href="#create-page">Save</a>
 				</div>
 			</div>
 		</sw-dialog>
+		<sw-item>
+			<li> <span class="sw-navigation-dialog-navigation-item-text">Item title</span>
+				<div class="sw-navigation-dialog-navigation-item-move" title="move navigation item" href="#move">-</div>
+				<a class="sw-navigation-dialog-navigation-item-edit" title="edit navigation item" href="#edit">/</a>
+				<a class="sw-navigation-dialog-navigation-item-delete" title="delete navigation item" href="#delete">x</a>
+			</li>
+		</sw-item>
 	</div>
 </sw-template>

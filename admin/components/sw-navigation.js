@@ -50,7 +50,10 @@
                 // prevent link actions
                 event.preventDefault();
 
-                var attributes = {};
+                var attributes = {
+                    'data-staticweb-component-navigation-id': self._element.id,
+                    'data-staticweb-component-navigation-type': self._element.getAttribute('data-staticweb-component-navigation-type')
+                };
                 var body = document.querySelector('body');
                 staticWeb.initComponent(body, 'sw-navigation-dialog', attributes);
                 return false;
@@ -60,6 +63,8 @@
             var self = this;
 
             var attributes = {
+                'data-staticweb-component-navigation-id': self._element.id,
+                'data-staticweb-component-navigation-type': self._element.getAttribute('data-staticweb-component-navigation-type'),
                 'data-staticweb-component-navigation-path': url,
                 'data-staticweb-component-navigation-name': name
             };
