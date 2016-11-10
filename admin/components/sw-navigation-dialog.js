@@ -64,14 +64,18 @@
         // add menu items
         var list = navContainer.querySelector('ul');
         for (var i = 0; i < self._menuItems.length; i++) {
-          var text = self._menuItems[i].text;
-          var url = self._menuItems[i].text;
+          var item  = self._menuItems[i];
+          if (!item) {
+            continue;
+          }
+          var text = item.text;
+          var url = item.url;
 
-          var item = self._itemTemplate.cloneNode(true);
-          item.setAttribute('sw-navigation-dialog-navigation-item-path', url);
-          item.querySelector('.sw-navigation-dialog-navigation-item-text').innerText = text;
+          var element = self._itemTemplate.cloneNode(true);
+          element.setAttribute('sw-navigation-dialog-navigation-item-path', url);
+          element.querySelector('.sw-navigation-dialog-navigation-item-text').innerText = text;
 
-          list.appendChild(item);
+          list.appendChild(element);
         }
 
         // add event handlers
@@ -82,13 +86,14 @@
 
         // show save button
         navSaveBtn.style.display = '';
-      }else {
+      } else {
         // hide save button if we have no navigation to show
         navSaveBtn.style.display = 'none';
       }
       console.log('menuItems:', self._menuItems);
     },
     setupItem: function (item, i) {
+      var self = this;
       item.setAttribute('draggable', 'true');
       item.id = 'sw-navigation-dialog-navigation-item-' + i;
       item.addEventListener('dragstart', function (event) {
@@ -111,6 +116,28 @@
           target.insertAdjacentElement('afterend', el);
         }
       });
+      item.querySelector('.sw-navigation-dialog-navigation-item-delete').addEventListener('click', function (event) {
+        event.preventDefault();
+
+        var currentUrl = item.getAttribute('sw-navigation-dialog-navigation-item-path');
+        self.removeMenuIem(currentUrl);
+        self.showNavigationControls(true);
+      });
+    },
+    removeMenuIem: function (currentUrl) {
+      var self = this;
+      for (var i = self._menuItems.length; i >= 0; i--) {
+        var item = self._menuItems[i];
+        if (!item) {
+          continue;
+        }
+
+        var url = item.url;
+        if (currentUrl === url) {
+          delete self._menuItems[i];
+          return;
+        }
+      }
     },
     getCurrentPath: function () {
       var path = window.location.pathname;
@@ -157,8 +184,9 @@
       console.log('storagePath:', storagePath);
       staticWeb.storage.get(storagePath, function (file, callStatus) {
         if (callStatus.isOK) {
-          var data = JSON.parse(file.data);
-          self._menuItems = data.list;
+          var data = file.data;
+          var obj = JSON.parse(file.data);
+          self._menuItems = obj.list;
         } else {
           self._menuItems = [];
         }
@@ -214,7 +242,7 @@
         var link = self._element.querySelector('#sw-navigation-dialog-url').value;
 
         self._menuItems.push({
-          'text': name,
+          'text': staticWeb.encodeToHtml(name),
           'url': link
         });
 
