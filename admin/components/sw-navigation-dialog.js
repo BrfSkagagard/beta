@@ -68,7 +68,7 @@
           if (!item) {
             continue;
           }
-          var text = item.text;
+          var text = staticWeb.decodeToText(item.text);
           var url = item.url;
 
           var element = self._itemTemplate.cloneNode(true);
