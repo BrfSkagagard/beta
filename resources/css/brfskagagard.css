@@ -301,6 +301,12 @@ body {
     display: none;
 }
 
+#google_translate_element {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
 
 @media print {
     .mood {
