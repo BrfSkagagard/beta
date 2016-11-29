@@ -1,12 +1,31 @@
 <sw-template>
 	<div>
+		<style>
+			.newsfeed-add {
+				background-color: green;
+				border-radius: 10px;
+				color: #fff;
+				text-align: center;
+				cursor: pointer;
+				display: block;
+				width: 100%;
+				padding: 10px;
+			    margin: 10px 0;
+				border: 0;
+			}
+		</style>
+		<add-newsfeed>
+			<button class="newsfeed-add">
+				Add news post here
+			</button>
+		</add-newsfeed>
 		<newsfeed-item>
 			<div id="2016-10-26" class="news-item">
 				<h2>Nyhet rubrik</h2>
 				<div class="news-date">Publicerad:
 					<time datetime="2016-10-26">2016-10-26</time>
 				</div>
-				<p>Nyhetes innehåll.</p>
+				<p>Nyhetens innehåll.</p>
 			</div>
 		</newsfeed-item>
 	</div>
