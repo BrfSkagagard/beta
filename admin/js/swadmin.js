@@ -273,7 +273,7 @@
             }
         });
     }
-    StaticWebDefinition.prototype.updateCurrentPage = function () {
+    StaticWebDefinition.prototype.updateCurrentPage = function (containerId, containerTagName, content) {
         var resourceName = location.pathname.substring(1);
         if (resourceName.length == 0) {
             resourceName = "index.html";
@@ -281,7 +281,7 @@
         if (resourceName[resourceName.length - 1] === '/') {
             resourceName = resourceName + "index.html";
         }
-        this.updatePage(resourceName);
+        this.updatePage(containerId, containerTagName, resourceName, content);
     }
     StaticWebDefinition.prototype.updatePage = function (containerId, containerTagName, resourceName, content) {
         var self = this;

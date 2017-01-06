@@ -37,15 +37,10 @@
         },
         save: function (editor) {
             if (editor && editor.startContent) {
-                var resourceName = location.pathname.substring(1);
-                if (!resourceName || resourceName[resourceName.length - 1] == '/') {
-                    resourceName += 'index.html';
-                }
-
                 var container = editor.bodyElement;
                 var content = container.innerHTML;
 
-                staticWeb.updatePage(container.id, container.tagName, resourceName, content);
+                staticWeb.updateCurrentPage(container.id, container.tagName, content);
             }
         },
         init: function (element) {
