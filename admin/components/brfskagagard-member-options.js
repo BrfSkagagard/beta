@@ -109,6 +109,6 @@
                 }
             });
         }
-    },
-        staticWeb.registerComponent('brfskagagard-member-options', MemberTest);
+    }
+    staticWeb.registerComponent('brfskagagard-member-options', MemberTest);
 })(window.StaticWeb);
