@@ -64,7 +64,7 @@
         // add menu items
         var list = navContainer.querySelector('ul');
         for (var i = 0; i < self._menuItems.length; i++) {
-          var item  = self._menuItems[i];
+          var item = self._menuItems[i];
           if (!item) {
             continue;
           }
@@ -153,13 +153,26 @@
       }
       return path;
     },
-    getConfigPath: function () {
+    getConfigFolder: function () {
       var self = this;
       var storagePath = false;
       switch (self._navType) {
         default:
         case 'global':
           storagePath = staticWeb.getAdminPath() + 'config/components/sw-navigation/';
+          break;
+        case 'local':
+          storagePath = self.getCurrentPath();
+          break;
+      }
+      return storagePath;
+    },
+    getConfigPath: function () {
+      var self = this;
+      var storagePath = self.getConfigFolder();
+      switch (self._navType) {
+        default:
+        case 'global':
           if (self._navName) {
             storagePath = storagePath + self._navName + '.json';
           } else {
@@ -167,7 +180,6 @@
           }
           break;
         case 'local':
-          storagePath = self.getCurrentPath();
           if (self._navName) {
             storagePath = storagePath + 'sw-navigation-' + self._navName + '.json';
           } else {
@@ -209,6 +221,15 @@
         list: self._menuItems
       };
       var data = JSON.stringify(obj);
+
+      // ensure current page is listed as dependency (IF navTyp == global )
+      switch (self._navType) {
+        default:
+        case 'global':
+          var dependencyFilePath = self.getConfigFolder() + "dep/" + self.getCurrentPath().replace(/\//g, '-') + '.config';
+          staticWeb.storage.set(dependencyFilePath, '1', function (file, callStatus) { });
+          break;
+      }
 
       // update navigation settings file
       staticWeb.storage.set(storagePath, data, function (file, callStatus) {
