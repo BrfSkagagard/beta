@@ -81,7 +81,7 @@
             }
         },
         setTextForElement: function (element, text) {
-            element.innerText = text;
+            element.innerHTML = text;
         },
         createInterface: function (storage) {
             var self = this;
