@@ -6,11 +6,15 @@
         'tokenService': 'https://brfskagagard-inloggning.azurewebsites.net?appName=admin-beta'
     }
     sw.config.permissions = {
-        'check': false, /* Only needed if you want different accessability rights. Currently only possible when using github storage */
+        'check': true, /* Only needed if you want different accessability rights. Currently only possible when using github storage */
         'storages': {
             'BrfSkagagard/beta': {
                 'type': 'admin',
                 'required': ['admin']
+            },
+            'flowertwig-org/brfskagagard-styrelsen': {
+                'type': 'styrelsen',
+                'required': ['admin', 'write', 'read']
             },
             'flowertwig-org/brfskagagard-lgh': {
                 'type': 'member',

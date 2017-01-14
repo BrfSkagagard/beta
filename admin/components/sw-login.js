@@ -22,22 +22,28 @@
     onStorageReady: function (storage) {
       var self = this;
       var level
-      if (staticWeb.isUserLevel(self._level)) {
-        var templateName = 'swlogin' + self._level + '-LoggedIn';
-        staticWeb.retrieveTemplate(templateName, function (template) {
-          self._element.innerHTML = '';
-          staticWeb.insertTemplate(template, self._element);
-        });
+      var templateName = false;
+      if (staticWeb.isUserLevel(self._permission)) {
+        templateName = 'swlogin' + self._level + '-LoggedIn';
+      } else {
+        templateName = 'swlogin' + self._level + '-LoggedOut';
+
       }
+      staticWeb.retrieveTemplate(templateName, function (template) {
+        self._element.innerHTML = '';
+        staticWeb.insertTemplate(template, self._element);
+      });
     },
     init: function (element) {
       var self = this;
       self._element = element;
-      self._level = element.getAttribute('data-sw-login-perm');
-      if (self._level) {
-        self._level = '-' + self._level;
-      }else {
+      self._level = '';
+      self._permission = element.getAttribute('data-sw-login-perm');
+      if (self._permission) {
+        self._level = '-' + self._permission;
+      } else {
         self._level = '';
+        self._permission = 'admin';
       }
       self.createInterface();
     }
