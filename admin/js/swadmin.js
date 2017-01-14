@@ -150,8 +150,10 @@
                         if (self.config.permissions.check) {
                             // Only storages with support for permissions can
                             // "checkPermissions". E.g: Github.
-                            self.checkPermissions(storage, self.notifyComponentsOfStorageReady);
-                            self.loadComponents()
+                            self.checkPermissions(storage, function() {
+                                self.notifyComponentsOfStorageReady(storage, self.permissionTypes);
+                                self.loadComponents();
+                            });
                         } else {
                             // Storages that don't support permissions default
                             // to requiring admin.
