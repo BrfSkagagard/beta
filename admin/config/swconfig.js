@@ -3,7 +3,7 @@
     sw.config.storage = {
         'type': 'github',
         'repo': 'BrfSkagagard/beta',
-        'tokenService': 'https://brfskagagard-inloggning.azurewebsites.net?appName=admin-beta'
+        'tokenService': 'https://oauthservice.azurewebsites.net?appName=beta'
     }
     sw.config.permissions = {
         'check': true, /* Only needed if you want different accessability rights. Currently only possible when using github storage */

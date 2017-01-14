@@ -120,9 +120,6 @@
     StaticWebDefinition.prototype.insertTemplate = function (template, element) {
         element.appendChild(template.cloneNode(true));
     }
-    StaticWebDefinition.prototype.isUserLevel = function (level) {
-        return level === 'visitor';
-    }
 
     StaticWebDefinition.prototype.includeStyle = function (addr) {
         var link = document.createElement('link');

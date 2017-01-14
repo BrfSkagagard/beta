@@ -16,7 +16,22 @@
         templateName = 'swlogin' + self._level + '-LoggingIn';
       }
       staticWeb.retrieveTemplate(templateName, function (template) {
-        staticWeb.insertTemplate(template, self._element);
+        var el = template.cloneNode(true);
+
+        var state = localStorage.getItem('freightCrane.github.tokenState');
+        if (!state) {
+          state = 'ts' + new Date().getTime();
+          localStorage.setItem('freightCrane.github.tokenState', state)
+        }
+
+        var link = el.querySelector('.sw-login');
+        if (link) {
+          var url = link.href;
+          url = url.replace('?', '?state=' + state + '&');
+          link.href = url;
+        }
+
+        staticWeb.insertTemplate(el, self._element);
       });
     },
     onStorageReady: function (storage) {
@@ -31,7 +46,22 @@
       }
       staticWeb.retrieveTemplate(templateName, function (template) {
         self._element.innerHTML = '';
-        staticWeb.insertTemplate(template, self._element);
+        var el = template.cloneNode(true);
+
+        var state = localStorage.getItem('freightCrane.github.tokenState');
+        if (!state) {
+          state = 'ts' + new Date().getTime();
+          localStorage.setItem('freightCrane.github.tokenState', state)
+        }
+
+        var link = el.querySelector('.sw-login');
+        if (link) {
+          var url = link.href;
+          url = url.replace('?', '?state=' + state + '&');
+          link.href = url;
+        }
+
+        staticWeb.insertTemplate(el, self._element);
       });
     },
     init: function (element) {
