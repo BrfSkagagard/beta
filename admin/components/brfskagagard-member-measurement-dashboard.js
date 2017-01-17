@@ -12,11 +12,28 @@
         init: function () {
             var self = this;
 
-            if (!staticWeb.config.permissions.check || staticWeb.isUserLevel('member')) {
+            self._styrelseView  = false;
+
+            if (!staticWeb.config.permissions.check || staticWeb.isUserLevel('member') || staticWeb.isUserLevel('styrelsen')) {
                 self.createInterface(staticWeb.storage);
             }
         },
         getApartmentRepo: function (storage, callback) {
+            var self = this;
+            // If we have specified apartmentNumber in query, use it
+            var searchForString = '?apartmentNumber=';
+            if (window.location.search.indexOf(searchForString) == 0) {
+                try {
+                    var apartmentNumber = parseInt(window.location.search.replace("?apartmentNumber=", ''));
+                    self._styrelseView = apartmentNumber;
+                    callback('flowertwig-org/brfskagagard-styrelsen');
+
+                    return;
+                } catch (error) {
+
+                }
+            }
+
             var apartmentRepo = localStorage.getItem('brfskagagard-member-apartment-repo');
             if (!!apartmentRepo) {
                 callback(apartmentRepo);
@@ -141,8 +158,11 @@
             this.getApartmentRepo(storage, function (repoPath) {
                 // Check if we have a valid repo path
                 if (!!repoPath) {
+
+                    var reportFilename = self._styrelseView ? 'minol-apartment-report-' + self._styrelseView + '-last-month.json' : 'minol-apartment-report-last-month.json';
+
                     storage.get(
-                        'minol-apartment-report-last-month.json',
+                        reportFilename,
                         function (info, status) {
                             if (status.isOK) {
                                 // Get apartment info
@@ -158,5 +178,5 @@
             });
         }
     }
-        staticWeb.registerComponent('brfskagagard-member-measurement-dashboard', MemberMeasurement);
+    staticWeb.registerComponent('brfskagagard-member-measurement-dashboard', MemberMeasurement);
 })(window.StaticWeb);
