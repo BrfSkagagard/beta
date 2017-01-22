@@ -78,9 +78,18 @@
                     contentNode.innerHTML = notification.Message;
                     staticWeb.insertTemplate(node, self._container);
                 }
-                
+
                 console.log(notification);
             }
+
+            var closeNodes = self._container.querySelectorAll('.notification-close');
+            for (var index = 0; index < closeNodes.length; index++) {
+                var closeNode = closeNodes[index];
+                closeNode.addEventListener('click', function () {
+                    this.parentNode.style.display = 'none';
+                });
+            }
+            
         },
         setTextOnElements: function (className, text) {
             var elements = document.getElementsByClassName(className);
