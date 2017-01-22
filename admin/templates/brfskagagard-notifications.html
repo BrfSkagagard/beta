@@ -1,0 +1,53 @@
+<sw-template>
+	<div>
+		<style>
+			.notifications {
+				position: fixed;
+				bottom: 0;
+				z-index: 100;
+				left: 0;
+				right: 0;
+			}
+			.notification {
+				border-top: solid 1px gray;
+			}
+			.notification-critical {
+				background-color: red;
+			}
+			.notification-warning {
+				background-color: orange;
+			}
+			.notification-information {
+				background-color: floralwhite;
+			}
+			.notification-content {
+				padding: 10px;
+			}
+		</style>
+		<notifications>
+			<div class="notifications">
+			</div>
+		</notifications>
+		<information>
+			<div class="notification notification-information">
+				<div class="notification-content">
+					Informations meddelanden.
+				</div>
+			</div>
+		</information>
+		<warning>
+			<div class="notification notification-warning">
+				<div class="notification-content">
+					Varnings meddelanden.
+				</div>
+			</div>
+		</warning>
+		<critical>
+			<div class="notification notification-critical">
+				<div class="notification-content">
+					Informations meddelanden.
+				</div>
+			</div>
+		</critical>
+	</div>
+</sw-template>
