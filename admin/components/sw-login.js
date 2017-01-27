@@ -15,6 +15,7 @@
       if (staticWeb.hasLoggedInInfo()) {
         templateName = 'swlogin' + self._level + '-LoggingIn';
       }
+      self._element.innerHTML = '';
       staticWeb.retrieveTemplate(templateName, function (template) {
         var el = template.cloneNode(true);
 
