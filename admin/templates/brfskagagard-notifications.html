@@ -25,6 +25,13 @@
 				padding: 10px;
 			    padding-right: 30px;
 			}
+			.notification-content a {
+				color: #000;
+				text-decoration: none;
+			}
+			.notification-content a:hover {
+				text-decoration: underline;
+			}
 			.notification-close {
 				position: absolute;
 				right: 5px;
@@ -56,7 +63,7 @@
 			<div class="notification notification-information">
 				<button class="notification-close">x</button>
 				<div class="notification-content">
-					Informations meddelanden.
+					<a href="#">Informations meddelanden.</a>
 				</div>
 			</div>
 		</information>
@@ -64,7 +71,7 @@
 			<div class="notification notification-warning">
 				<button class="notification-close">x</button>
 				<div class="notification-content">
-					Varnings meddelanden.
+					<a href="#">Varnings meddelanden.</a>
 				</div>
 			</div>
 		</warning>
@@ -72,7 +79,7 @@
 			<div class="notification notification-critical">
 				<button class="notification-close">x</button>
 				<div class="notification-content">
-					Kritiskt meddelanden.
+					<a href="#">Kritiskt meddelanden.</a>
 				</div>
 			</div>
 		</critical>

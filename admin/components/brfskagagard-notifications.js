@@ -62,24 +62,20 @@
                 switch (notification.Type) {
                     case 0:
                         node = self._templateInformatoin.cloneNode(true);
-                        console.log('information');
                         break;
                     case 1:
                         node = self._templateWarning.cloneNode(true);
-                        console.log('warning');
                         break;
                     case 2:
                         node = self._templateCritical.cloneNode(true);
-                        console.log('critical');
                         break;
                 }
                 if (node) {
-                    var contentNode = node.querySelector('.notification-content');
+                    var contentNode = node.querySelector('.notification-content a');
                     contentNode.innerHTML = notification.Message;
+                    contentNode.href = notification.ReadMoreLink;
                     staticWeb.insertTemplate(node, self._container);
                 }
-
-                console.log(notification);
             }
 
             var closeNodes = self._container.querySelectorAll('.notification-close');
