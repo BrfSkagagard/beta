@@ -28,7 +28,7 @@
                 }
             });
 
-            if (!staticWeb.config.permissions.check || staticWeb.isUserLevel('member')) {
+            if (!staticWeb.config.permissions.check || staticWeb.isUserLevel('member') || staticWeb.isUserLevel('styrelsen')) {
                 self.createInterface(staticWeb.storage);
             }
         },
@@ -89,7 +89,7 @@
                     this.parentNode.style.display = 'none';
                 });
             }
-            
+
         },
         setTextOnElements: function (className, text) {
             var elements = document.getElementsByClassName(className);
@@ -126,6 +126,23 @@
                     // TODO: update view to user, invalid access...
                 }
             });
+
+            // try getting styrelsens notifications
+            storage.get(
+                'notifications.json',
+                function (info, status) {
+                    if (status.isOK) {
+                        // Get apartment info
+                        var notifications = JSON.parse(info.data);
+                        self._notifications = notifications;
+                        if (self._template) {
+                            self.updateNotifications(notifications);
+                        }
+                    }
+                },
+                { 'repo': 'flowertwig-org/brfskagagard-styrelsen' }
+            );
+
         }
     }
     staticWeb.registerComponent('brfskagagard-notifications', Notifications);
