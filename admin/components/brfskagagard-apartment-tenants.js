@@ -70,7 +70,7 @@
             var emailContainer = element.querySelector('.owner-email');
             if (info.Email) {
                 var emailElement = emailContainer.querySelector('a');
-                emailElement.href = "mail:" + info.Email;
+                emailElement.href = "mailto:" + info.Email;
             }
             else {
                 emailContainer.remove();
@@ -79,7 +79,7 @@
             var phoneContainer = element.querySelector('.owner-phone');
             if (info.Phone) {
                 var phoneElement = phoneContainer.querySelector('a');
-                phoneElement.href = 'tele:' + info.Phone;
+                phoneElement.href = 'tel:' + info.Phone;
                 phoneElement.innerText = info.Phone;
             }
             else {
