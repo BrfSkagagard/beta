@@ -17,14 +17,6 @@
 
             self._styrelseView = false;
 
-            // staticWeb.retrieveTemplate("brfskagagard-member-options", function (template) {
-            //     self._template = template;
-            //     staticWeb.insertTemplate(self._template, self._element);
-            //     if (self._apartmentInfo) {
-            //         self.updateApartmentInfo(self._apartmentInfo);
-            //     }
-            // });
-
             if (!staticWeb.config.permissions.check || staticWeb.isUserLevel('member') || staticWeb.isUserLevel('styrelsen')) {
                 self.createInterface(staticWeb.storage);
             }
@@ -85,8 +77,6 @@
             else {
                 phoneContainer.remove();
             }
-
-
         },
         updateApartmentInfo: function (apartmentInfo) {
             var self = this;
@@ -109,39 +99,10 @@
                 }
             }
 
-            // var options = document.getElementsByClassName('brfskagagard-member-options');
-            // for (var index = 0; index < options.length; index++) {
-            //     var element = options[index];
-            //     element.style.display = 'block';
-            // }
-
-            // this.setTextOnElements('flowertwig-mypages-options-info-building', apartmentInfo.Building);
-            // this.setTextOnElements('flowertwig-mypages-options-info-apartment', 'Lgh. ' + apartmentInfo.Number);
-            // this.setTextOnElements('flowertwig-mypages-options-info-size', 'Storlek: ' + apartmentInfo.Size);
-
-            // var delivery = [];
-            // for (var index = 0; index < apartmentInfo.Owners.length; index++) {
-            //     var owner = apartmentInfo.Owners[index];
-            //     for (var index2 = 0; index2 < owner.WayOfInfo.length; index2++) {
-            //         var way = owner.WayOfInfo[index2];
-            //         if (delivery.indexOf(way) === -1) {
-            //             delivery.push(way);
-            //         }
-            //     }
-            // }
-
-            // this.setTextOnElements('flowertwig-mypages-options-info-delivery', delivery.join(','));
-            // this.setTextOnElements('flowertwig-mypages-options-info-tenents', 'Boende: ' + apartmentInfo.Owners.length + ' st');
-        },
-        setTextOnElements: function (className, text) {
-            var elements = document.getElementsByClassName(className);
-            for (var index = 0; index < elements.length; index++) {
-                var element = elements[index];
-                this.setTextForElement(element, text);
+            var link = self._element.querySelector('.apartment-number-link');
+            if (link) {
+                link.href = link.href + apartmentInfo.Number;
             }
-        },
-        setTextForElement: function (element, text) {
-            element.innerHTML = text;
         },
         createInterface: function (storage) {
             var self = this;
