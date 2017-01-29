@@ -70,7 +70,7 @@
             var emailContainer = element.querySelector('.owner-email');
             if (info.Email) {
                 var emailElement = emailContainer.querySelector('a');
-                emailElement.href = info.Email;
+                emailElement.href = "mail:" + info.Email;
             }
             else {
                 emailContainer.remove();
